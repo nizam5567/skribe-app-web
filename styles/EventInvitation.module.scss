@@ -1,0 +1,572 @@
+@use "fonts";
+@use "sass-utils/variables";
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    .event-invitation-right {
+      flex: 1;
+
+      .content {
+        display: flex;
+        flex-direction: row;
+
+        .content-left {
+          flex: 1;
+          padding: 0px 0px 0px 0px;
+          font-size: variables.$minimum-font-size;
+
+          .header-section {
+            border-bottom: 1px solid variables.$border-color;
+            padding: 20px 40px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            .heading {
+              color: variables.$blue-color;
+              margin: 0;
+            }
+          }
+          .event-details-left-section {
+            padding: 40px 40px;
+            font-size: variables.$minimum-font-size;
+            //min-height: 70vh;
+          }
+
+          .form-sub-heading {
+            color: variables.$blue-color;
+            // padding-bottom: 20px;
+          }
+
+          .new-event-box {
+            .deposition-select-box {
+              font-size: variables.$minimum-font-size;
+            }
+            label {
+              //padding: 0 10px;
+              color: variables.$gray-color;
+              margin-bottom: 0;
+            }
+
+            input,
+            select {
+              padding-top: 14px;
+              padding-bottom: 14px;
+              &::placeholder {
+                color: variables.$gray-color;
+              }
+            }
+
+            input:focus {
+              outline: none !important;
+              // border: 2px solid #1976d2;
+              border: 2px solid variables.$blue-color;
+              // box-shadow: 0 0 10px #719ECE;
+            }
+          }
+
+          // .event-date {
+          //   display: flex;
+          //   flex-direction: row;
+          //   border: 1px solid variables.$border-color;
+          //   border-radius: variables.$border-radius;
+          //   padding: 20px 15px;
+
+          //   .img {
+          //     padding-right: 15px;
+          //     padding-top: 6px;
+          //   }
+          .date-picker-container {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            .top {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+
+              .left {
+                display: flex;
+                flex-direction: row;
+                .day {
+                  border: 1px solid variables.$border-color;
+                  border-radius: variables.$border-radius;
+                  padding: 5px 15px;
+                  text-align: center;
+                }
+                .change-day {
+                  display: flex;
+                  align-items: center;
+                  padding-left: 5px;
+                }
+              }
+              .center {
+                flex: 1;
+                text-align: center;
+                font-weight: fonts.$semi-bold;
+              }
+              .right {
+                .week-month-option {
+                  border: 1px solid variables.$border-color;
+                  border-radius: variables.$border-radius;
+                  padding: 5px 15px;
+                  text-align: center;
+                  color: #656565;
+
+                  span:first-child {
+                    padding-right: 15px;
+                  }
+
+                  span.active {
+                    color: variables.$black-color;
+                  }
+                }
+              }
+            }
+            .bottom {
+              padding-top: 10px;
+              //margin: 0 -12px;
+              width: 100%;
+
+              .date-selection {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .date-box {
+                  background-color: variables.$gray-color2;
+                  width: 70px;
+                  height: 70px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  margin-right: 10px;
+                  position: relative;
+                  cursor: pointer;
+
+                  &:hover {
+                    background-color: variables.$blue-color;
+
+                    .day,
+                    .date {
+                      color: #fff;
+                    }
+                  }
+
+                  span {
+                    padding-left: 15px;
+                  }
+                  .day {
+                    font-size: variables.$minimum-font-size;
+                    color: #707070;
+                  }
+                  .date {
+                    font-size: 1.25rem;
+                    color: variables.$black-color;
+                  }
+                  .check-circle {
+                    display: none;
+                    color: #ae7d29;
+                    position: absolute;
+                    bottom: 3px;
+                    right: 5px;
+                  }
+                }
+
+                .date-box:last-child {
+                  margin-right: 0;
+                }
+                .selected {
+                  background-color: variables.$blue-color;
+
+                  .day,
+                  .date {
+                    color: #fff;
+                  }
+
+                  .check-circle {
+                    display: block;
+                  }
+                }
+                .current-date {
+                  border: 1px solid #ae7d29;
+                }
+              }
+
+              .time-selection {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .date {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  background-color: variables.$blue-color;
+                  color: #ffffff;
+                  font-size: variables.$minimum-font-size;
+                  font-weight: fonts.$bold;
+                  min-height: auto;
+                  padding: 10px 15px;
+                  border-radius: 5px;
+                  cursor: pointer;
+
+                  .img {
+                    padding-right: 5px;
+                    padding-top: 0;
+                    margin-right: 5px;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+
+                .start-time,
+                .end-time {
+                  border: 1px solid variables.$border-color;
+                  border-radius: variables.$border-radius;
+                  padding: 15px 15px;
+                  margin: 0 10px;
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+
+                  span {
+                    padding-right: 10px;
+                  }
+                  select {
+                    border: none;
+                  }
+                }
+                .end-time {
+                  margin: 0;
+                }
+              }
+            }
+            .date-picker-section {
+              //width: 190px;
+              padding-right: 5px;
+              input,
+              label {
+                font-size: variables.$minimum-font-size;
+              }
+            }
+            .start-time-picker {
+              //width: 150px;
+              padding-right: 5px;
+              input,
+              label {
+                font-size: variables.$minimum-font-size;
+              }
+            }
+            .end-time-picker {
+              //width: 150px;
+              padding-right: 5px;
+              input,
+              label {
+                font-size: variables.$minimum-font-size;
+              }
+            }
+            .time-zone-section {
+              //width: 120px;
+              padding-right: 5px;
+              div,
+              label {
+                font-size: variables.$minimum-font-size;
+              }
+            }
+            // @media screen and (max-width: 991px) {
+            //   .date-picker-section{
+            //     // width: 150px;
+            //     padding-right: 10px;
+            //   }
+            //   .start-time-picker{
+            //     width: 80px;
+            //     padding-right: 10px;
+            //   }
+            //   .end-time-picker{
+            //     width: 80px;
+            //     padding-right: 10px;
+            //   }
+            // }
+          }
+          //}
+
+          .invite-peoples-container {
+            border: 1px solid variables.$border-color;
+            border-radius: variables.$border-radius;
+            padding: 9px 15px;
+            margin: 14px 0;
+            &.email-error{
+              border: 1px solid red;
+            }
+
+            .invite-peoples {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              cursor: pointer;
+
+              .img {
+                padding: 0 5px 0 0;
+                display: flex;
+                align-items: center;
+              }
+
+              input {
+                border: none;
+                min-height: auto;
+
+                &:focus {
+                  border: none;
+                  outline: none;
+                }
+              }
+            }
+
+            .invite-user-list {
+              padding: 5px 10px;
+              background-color: #f1f5f8;
+              border-radius: variables.$border-radius;
+              margin: 5px 0 5px 28px;
+              display: flex;
+              flex-direction: row;
+
+              .user-email {
+                flex: 1;
+              }
+
+              .types {
+                span {
+                  padding-right: 10px;
+                  font-size: variables.$minimum-font-size;
+                  color: variables.$gray-color;
+                  cursor: pointer;
+                }
+
+                .active {
+                  color: variables.$black-color;
+                }
+                .delete-icon {
+                  padding-right: 0;
+                  padding-top: 2px;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          .invitation-link {
+            border: 1px solid variables.$border-color;
+            border-radius: variables.$border-radius;
+            padding: 7px 15px;
+            margin: 0 0 14px;
+            display: flex;
+            flex-direction: row;
+            .hiddenShareLink{
+              display: none;
+            }
+            &.invitation-link-error{
+              border: 1px solid red;
+            }
+
+            .img {
+              padding: 0 20px 0 0;
+              position: relative;
+              top: 8px;
+            }
+
+            .create-share-link {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              flex: 1;
+
+              .text {
+                flex: 1;
+              }
+            }
+
+            .share-link-container {
+              display: flex;
+              flex-direction: row;
+              flex: 1;
+              padding-top: 8px;
+
+              .share-link-info {
+                flex: 1;
+                font-size: variables.$minimum-font-size;
+
+                .sharable-link {
+                  font-weight: fonts.$bold;
+                }
+                .copy-link,
+                .copy-passcode {
+                  color: variables.$blue-color;
+                  padding-left: 20px;
+                  cursor: pointer;
+                }
+
+                .passcode-container {
+                  padding-top: 10px;
+
+                  .passcode {
+                    font-weight: fonts.$bold;
+                    padding-left: 15px;
+                  }
+                }
+              }
+
+              .delete-link-container {
+                font-size: variables.$minimum-font-size;
+
+                .delete-link {
+                  color: #ff0007;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          .add-exhibits {
+            border: 1px solid variables.$border-color;
+            border-radius: variables.$border-radius;
+            padding: 7px 15px;
+            margin: 14px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            cursor: pointer;
+
+            .img {
+              padding: 0 20px 0 0;
+              display: flex;
+              align-items: center;
+            }
+            &-container {
+              display: flex;
+              align-items: center;
+              width: 100%;
+              justify-content: space-between;
+              span.text {
+                font-size: 0.875rem;
+              }
+            }
+          }
+
+          .sidepanel {
+            width: 0;
+            //min-height: 100vh;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            // background-color: black;
+            background-color: #fff;
+            // opacity: 0.8;
+            overflow-x: auto;
+            transition: 0.3s;
+            padding-top: 30px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          }
+        }
+        .content-right {
+          //width: 300px;
+          //margin: 20px 25px 15px 0;
+          //box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          padding: 30px 0px 15px 0px;
+          min-height: 100vh;
+          box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+          .connect-calendars-title {
+            color: variables.$blue-color;
+            // padding-bottom: 8px;
+          }
+
+          .connect-calendars-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: auto;
+            // align-items: center;
+
+            .btn-connect-calendar {
+              margin: 10px 0;
+              text-align: left;
+              line-height: 24px;
+              background: variables.$gray-color2;
+              color: variables.$black-color;
+              text-decoration: unset;
+              height: 50px;
+              padding: 0px;
+              display: flex;
+              align-items: center;
+              position: relative;
+              width: 250px;
+
+              &:first-child {
+                margin-top: 0;
+              }
+
+              .faIconCls,
+              i {
+                margin: 0 18px 0;
+              }
+
+              .img {
+                margin: 0 15px 0;
+                display: flex;
+                align-items: center;
+              }
+
+              .faIconCls {
+                color: #707070;
+                font-size: 20px;
+              }
+
+              .arrow-right {
+                // background: url("/images/arrow-right.png") no-repeat;
+                background-repeat: no-repeat;
+                width: 24px;
+                height: 24px;
+                right: 15px;
+                position: absolute;
+              }
+            }
+          }
+        }
+        .deposition-icon {
+          background-color: #ff0007;
+        }
+      }
+
+      .footer {
+        padding: 20px 80px 10px 80px;
+        border-top: 1px solid variables.$border-color;
+
+        .btn-holder {
+          :first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.event-type-selectbox,
+.event-type-selectbox-item {
+  color: variables.$black-color;
+}
+
+@media screen and (max-width: 991px) {
+  .container {
+    .main {
+      .event-invitation-right {
+        margin-top: 40px;
+      }
+    }
+  }
+}

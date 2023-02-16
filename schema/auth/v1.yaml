@@ -1,0 +1,355 @@
+openapi: 3.0.2
+info:
+  version: '1.0'
+  title: 'Skribe Authentication Endpoints'
+  description: Endpoints used during the authentication, session verification or user creation processes.
+servers:
+  - url: 'https://dev.skribe.ai'
+paths:
+  /auth/onboard:
+    post:
+      summary: Creates a new tenantless user that does not have access to any areas of the app.
+      description: When a new user wishes to create an account, a POST request to this endpoint will handle all of the necessary backend requirements to create the user account.
+
+
+        The `provider` property determines what fields should appear in the request body.  If the `provider` is `email`, then the `email` and `password` properties are required.  For all other providers it's only necessary to provide the `token` returned from the identity provider.
+      operationId: createUser
+      tags:
+        - /auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
+
+      responses:
+        '201':
+          description: Always returns a 201, unless there was a system error.
+        '400':
+          description: Response with error code 400 if an exception has occurred.
+        '502':
+          description: Temporary system error occurred.
+  /auth/login:
+    post:
+      summary: Called after the user has authenticated client-side with the Firebase auth library.
+      operationId: userLogin
+      description: |
+        This endpoint should be called after a user has authenticated on the client-side using the Firebase auth library.  Use the ID token returned from the client-side authentication process and pass it to this endpoint to receive a new token with custom claims.
+      
+      tags:
+        - /auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginSchema"
+      responses:
+        '200':
+          description: 'Login successful'
+          headers:
+            Set-Cookie:
+              $ref: '#/components/headers/SessionCookie'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+                    
+  /auth/logout:
+    post:
+      summary: Clears the session cookie and destroys the session.
+      operationId: userLogout
+      description: When a user clicks the "Logout" button on the website, call this endpoint _before_ calling `signOut()` on the client-side.
+      tags:
+        - /auth
+      responses:
+        '200':
+          description: Always returns a 200, unless there was a system error.
+        '502':
+          description: Temporary system error occurred.
+  /auth/status:
+    get:
+      summary: Checks the status of a user's session and mints a new token if necessary.
+      description: |
+        This endpoint is called whenever we need to validate a user's session.  For example, when a user returns to the website, we first check if the user is authenticated with the client-side Firebase auth library.
+
+        Then that token should be passed to this endpoint to validate the session, which will result in one of the following:
+
+        **Session is Valid**
+
+        An empty 200 response simply means all is well.
+
+        **Token doesn't contain custom claims or the session is near expiration**
+
+        A new session cookie is set and a new token is minuted and returned.  The new token needs to be passed to `signInWithCustomToken()`.
+
+        **Session is Invalid / User was Deleted**
+
+        The session cookie is cleared and the user's token is revoked, if found.
+
+        ## Errors
+
+        **TENANT_NOT_FOUND**
+
+        The tenant specified in the token's custom claims doesn't exist, so destroy the user's session.
+
+        **TENANT_NOT_ACTIVE**
+
+        The tenant specified in the token's custom claims is suspended/inactive. Forward the user to an informational page.
+
+        **USER_DISABLED**
+
+        The user's account across all tenants, so destroy the user's session.
+
+        **TENANT_USER_NOT_FOUND**
+
+        The user is not associated with the tenant specified in the token's custom claims, so destroy the user's session.
+
+        **UNKNOWN**
+
+        Any other error.
+
+      tags:
+        - /auth
+      operationId: authStatus
+      parameters:
+        - name: token
+          in: query
+          description: Access token returned from the Firebase auth library.
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: 'Session is valid'
+        '201':
+          description: 'Session is valid, reauthenticate client-side with provided token'
+          headers:
+            Set-Cookie:
+              $ref: '#/components/headers/SessionCookie'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '400':
+          description: The request was malformed.  Did you forget the `token` parameter?
+        '401':
+          description: The token provided was invalid.
+        '403':
+          description: The user is not associated with the tenant specified in their custom claims, most likely because the user was deleted from a tenant.
+        '404':
+          description: The user and/or tenant specified in the custom claims was not found.
+        '502':
+          description: An unknown error occurred.
+  /auth/tenant:
+    get:
+      summary: Returns a list of tenants and providers associated with a given email address.
+      description: |
+        During the login process when a user enters their email address, that email should be passed to this endpoint to determine:
+
+        * The tenant(s) that this user can authenticate against.
+
+        * The provider(s) that each tenant uses.
+
+        With this information the login process can continue allowing the user to authenticate against the correct tenant's Identity Provider.
+      tags:
+        - /auth
+      operationId: authTenant
+      parameters:
+        - name: email
+          in: query
+          description: Email address of the user wanting to log in.
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Return a list of tenants"
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/TenantSummary"
+  /auth/participants:
+    post: 
+      summary: Get parcipnats details
+      operationId: parcipantInfo
+      tags:
+        - /auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetParticipant"
+      responses:
+        '200':
+          description: 'Successfully fetched participant info'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipantResponse'
+
+components:
+  headers:
+    SessionCookie:
+      schema:
+        type: string
+      description: Secure session cookie
+      example: __session=e0i1q2JPBxSnScsx9xzAWp6P2R23ZWRy4nYW2ChqfKHZRjZjSyJ0t1kkJ2A; httpOnly=true; secure=true; sameSite=strict; path=/
+  schemas:
+    Provider:
+      type: string
+      description: The identity provider
+      enum:
+        - email
+        - oidc
+        - saml
+        - google
+        - twitter
+        - facebook
+        - microsoft
+        - apple
+        - linkedin
+        - yahoo
+        - play
+        - github
+        - phone
+        - anonymous
+    EmployeCount:
+      type: string
+      description : Total number of employees using this platform
+      enum:
+        - 1-9
+        - 10-99
+        - 100-499
+        - 500
+    CreateUser:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - title
+        - company
+        - employees
+        - country
+        - phone
+        - email
+        - recaptcha
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+        lastName:
+          type: string
+          minLength: 1
+        title:
+          type: string
+          minLength: 1
+        company:
+          type: string
+          minLength: 1
+        employees:
+          $ref: "#/components/schemas/EmployeCount"
+        country:
+          type: string
+          minLength: 1
+        state:
+          type: string
+          minLength: 1
+        phone:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+          minLength: 1
+        recaptcha:
+          type: string
+          minLength: 1
+        invitationCode:
+          type: string 
+          minLength: 1
+    User:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    TenantSummary:
+      properties:
+        tenants:
+          type: array
+          items: 
+            $ref: "#/components/schemas/Tenant"
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        providers:
+          type: array
+          items:
+            type: string
+    LoginSchema:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          example: e0i1q2JPBxSnScsx9xzAWp6P2R23ZWRy4nYW2ChqfKHZRjZjSyJ0t1kkJ2A
+        recaptcha:
+          type: string
+    AccessToken:
+      type: object
+      properties:
+        token: 
+          type: string
+          description: Token used for authenticating with `signInWithCustomToken()` 
+          example: e0i1q2JPBxSnScsx9xzAWp6P2R23ZWRy4nYW2ChqfKHZRjZjSyJ0t1kkJ2A
+    GetParticipant:
+      type: object
+      required :
+        - token
+        - key
+      properties:
+        token:
+          type: string
+        key:
+          type: string
+    ParticipantResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        eventId:
+          type: integer
+          format: int32
+        participantId:
+          type: integer
+          format : int32
+        partyId:
+          type: integer
+          format: int32
+        dateStart:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

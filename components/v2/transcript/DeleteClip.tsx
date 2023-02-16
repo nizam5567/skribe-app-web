@@ -1,0 +1,84 @@
+import { Button, CircularProgress, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import { getEventService, getExhibitService } from '../../../helpers/api-helper';
+import { boundClipActions } from '../../../redux/reducers/clipsReducer/clipsAction';
+import { boundExhibitsActions } from '../../../redux/reducers/exhibitReducer/exhibitAction';
+import { boundMattersActions } from '../../../redux/reducers/matterReducer/matterAction';
+import { closeModal } from '../../../redux/reducers/modalReducer/modalAction';
+import { boundSnackbarActions } from '../../../redux/reducers/snackbarReducer/snackbarAction';
+import { useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
+import { handleApiError } from '../../../util/error-handlers';
+import Modal from '../Modal';
+
+const DeleteClipModal = () => {
+  const { accessToken } = useAuthContext();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const eventId: string = router.query.eventId as string;
+  const matterId: string = router.query.matterId as string;
+  const modalStatus = useSelector((state: any) => state?.modalReducer?.modalStatus);
+  const modalName = useSelector((state: any) => state?.modalReducer?.modalName);
+  const [modalTitle, setModalTitle] = useState('Delete Clip');
+  const [openModalCommon, setOpenModalCommon] = useState(false);
+  const handleModalOpen = () => setOpenModalCommon(true);
+  const handleModalClose = () => setOpenModalCommon(false);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { clip } = useAppSelector((state: RootState) => state.clipsReducer);
+
+  useEffect(() => {
+    if (modalStatus && modalName === 'deleteClip') {
+      handleModalOpen();
+    } else {
+      handleModalClose();
+    }
+  }, [modalStatus]);
+
+  const handleCancel = () => {
+    dispatch(closeModal());
+  };
+
+  const handleDeleteClip = async () => {
+    console.log('clip', clip);
+    const clipId: number = clip?.clipId;
+    setIsLoading(true);
+    if (accessToken) {
+      try {
+        const eventService = await getEventService(accessToken);
+        const response = await eventService.eventsControllerDeleteVideoClip(clipId);
+        boundClipActions.doDeleteClip(clipId);
+        boundSnackbarActions.success('Clips deleted!');
+        setIsLoading(false);
+        dispatch(closeModal());
+      } catch (error) {
+        boundSnackbarActions.error('Something error occurred!');
+        setIsLoading(false);
+      }
+    }
+  };
+
+  return (
+    <Modal openModal={openModalCommon} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} modalTitle={modalTitle}>
+      <Box sx={{ 'width': '100%' }} display="flex" flexDirection={'column'} justifyContent="center" alignItems="flex-start">
+        <Typography p={3} textAlign={'left'} sx={{ 'width': '100%' }}>
+          Are you sure you want delete ?
+        </Typography>
+        <Box p={3} sx={{ 'borderTop': '1px solid #e6e6e6', 'width': '100%' }} display="flex" flexDirection={'row'}>
+          <Button variant="contained" size="small" type="button" sx={{ 'marginRight': '16px', 'background': 'red', '&:hover': { 'background': 'red' } }} onClick={handleDeleteClip} startIcon={isLoading && <CircularProgress size="1rem" color="inherit" />} disabled={isLoading}>
+            Delete
+          </Button>
+          <Button variant="outlined" size="small" type="button" color="secondary" sx={{}} onClick={handleCancel}>
+            Cancel
+          </Button>
+        </Box>
+      </Box>
+    </Modal>
+  );
+};
+
+export default DeleteClipModal;

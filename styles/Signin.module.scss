@@ -1,0 +1,130 @@
+@use 'fonts';
+@use 'sass-utils/variables';
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    .signin-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .signin-form {
+        width: 370px;
+        .signin-form-heading {
+          margin: 0 0 15px;
+        }
+
+        .or-seperator {
+          margin: 20px auto;
+          text-align: center;
+          border-top: 1px solid variables.$gray-color2;
+          position: relative;
+          width: 300px;
+
+          span {
+            padding: 0;
+            z-index: 1;
+            font-size: variables.$minimum-font-size;
+            position: absolute;
+            top: -12px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            margin: auto;
+            background: #fff;
+            width: 152px;
+          }
+        }
+
+        .signin-with-email-txt {
+          margin-bottom: 30px 0px;
+          color: variables.$blue-color;
+        }
+
+        .form-group {
+          margin-bottom: 14px;
+          display: flex;
+          justify-content: center;
+        }
+        .input-group {
+          position: relative;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+          -ms-flex-align: stretch;
+          align-items: stretch;
+          width: 100%;
+          justify-content: center;
+        }
+
+        input[type='text'],
+        input[type='password'] {
+          // background: #f9fafc;
+        }
+
+        .btn-holder {
+          margin-top: 30px;
+
+          .btn-signup-signin {
+            position: relative;
+            color: #fff;
+            background-color: variables.$blue-color;
+            border-color: variables.$blue-color;
+            width: 300px;
+            height: 50px;
+            cursor: pointer;
+          }
+        }
+
+        .new-to-skribe {
+          color: variables.$blue-color;
+          font-size: variables.$minimum-font-size;
+          text-align: center;
+        }
+
+        .long-arrow-right {
+          // background: url("/images/arrow-right.png") no-repeat;
+          background-repeat: no-repeat;
+          width: 36px;
+          height: 17px;
+          margin-right: auto;
+          right: 20px;
+          position: absolute;
+        }
+
+        .forgot-pass {
+          justify-content: right;
+          font-size: variables.$minimum-font-size;
+          color: variables.$gray-color;
+          background: #fff;
+          a{
+            text-align: right;
+          }
+        }
+      }
+      .cross-icon{
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        cursor: pointer;
+    }
+    }
+  }
+}
+.forgot-password-modal{
+  .cross-icon{
+    position: absolute;
+    right: 32px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,47 @@
+@use "../styles/fonts";
+@use "../styles/sass-utils/variables";
+
+.social-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+
+    .btn-social-custom {
+        margin: 10px 0;
+        text-align: left;
+        line-height: 24px;
+        background: variables.$gray-color2;
+        color: variables.$black-color;
+        text-decoration: unset;
+        height: 50px;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 300px;
+
+        // .faIconCls,
+        // i {
+        //     margin: 0 18px 0;
+        // }
+
+        // .faIconCls {
+        //     color: variables.$gray-color;
+        // }
+        .social-icon {
+            margin: 0px 15px;
+            display: flex;
+        }
+
+        .long-arrow-right {
+            // background: url("/images/arrow-right.png") no-repeat;
+            background-repeat: no-repeat;
+            width: 36px;
+            height: 17px;
+            right: 20px;
+            position: absolute;
+        }
+    }
+}

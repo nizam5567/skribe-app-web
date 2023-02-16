@@ -1,0 +1,278 @@
+@use "fonts";
+@use "sass-utils/variables";
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  .main {
+    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    .event-details-right {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      min-width: 45%;
+
+      .content-left {
+        flex: 1;
+        padding: 30px 0 0 0;
+
+        .top-section {
+          padding: 0 15px 10px 15px;
+          display: flex;
+          flex-direction: row;
+          border-bottom: 1px solid variables.$border-color;
+
+          .header-info {
+            flex: 1;
+            .header-name {
+              color: variables.$blue-color;
+              margin: 0;
+            }
+            .time-info-and-button {
+              padding-top: 5px;
+              padding-left: 16px;
+              font-size: variables.$minimum-font-size;
+              color: variables.$gray-color;
+
+              span {
+                display: inline-block;
+                padding-right: 10px;
+              }
+            }
+          }
+
+          .search-section {
+            color: variables.$gray-color;
+            font-size: variables.$minimum-font-size;
+            display: flex;
+            align-items: center;
+            width: 125px;
+          }
+        }
+        .event-details-left-section {
+            padding: 40px 40px;
+            font-size: variables.$minimum-font-size;
+            //min-height: 70vh;
+          }
+          .form-group-event{
+            font-size: variables.$minimum-font-size !important;
+          }
+          .date-picker-section {
+            //width: 190px;
+            padding-right: 5px;
+            input,
+            label {
+              font-size: variables.$minimum-font-size;
+            }
+          }
+          .start-time-picker {
+            //width: 150px;
+            padding-right: 5px;
+            input,
+            label {
+              font-size: variables.$minimum-font-size;
+            }
+          }
+          .end-time-picker {
+            //width: 150px;
+            padding-right: 5px;
+            input,
+            label {
+              font-size: variables.$minimum-font-size;
+            }
+          }
+          .time-zone-section {
+            //width: 120px;
+            padding-right: 5px;
+            div,
+            label {
+              font-size: variables.$minimum-font-size;
+            }
+          }
+          .form-sub-heading{
+            color: variables.$blue-color;
+            padding-top: 30px;
+        }
+          .invite-peoples-container {
+            border: 1px solid variables.$border-color;
+            border-radius: variables.$border-radius;
+            padding: 9px 15px;
+            margin: 14px 0;
+            &.email-error{
+              border: 1px solid red;
+            }
+
+            .invite-peoples {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              cursor: pointer;
+
+              .img {
+                padding: 0 5px 0 0;
+                display: flex;
+                align-items: center;
+              }
+
+              input {
+                border: none;
+                min-height: auto;
+
+                &:focus {
+                  border: none;
+                  outline: none;
+                }
+              }
+            }
+
+            .invite-user-list {
+              padding: 5px 10px;
+              background-color: #f1f5f8;
+              border-radius: variables.$border-radius;
+              margin: 5px 0 5px 28px;
+              display: flex;
+              flex-direction: row;
+
+              .user-email {
+                flex: 1;
+              }
+
+              .types {
+                span {
+                  padding-right: 10px;
+                  font-size: variables.$minimum-font-size;
+                  color: variables.$gray-color;
+                  cursor: pointer;
+                }
+
+                .active {
+                  color: variables.$black-color;
+                }
+                .delete-icon {
+                  padding-right: 0;
+                  padding-top: 2px;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          .invitation-link {
+            border: 1px solid variables.$border-color;
+            border-radius: variables.$border-radius;
+            padding: 7px 15px;
+            margin: 0 0 14px;
+            display: flex;
+            flex-direction: row;
+            .hiddenShareLink{
+              display: none;
+            }
+            &.invitation-link-error{
+              border: 1px solid red;
+            }
+
+            .img {
+              padding: 0 20px 0 0;
+              position: relative;
+              top: 8px;
+            }
+
+            .create-share-link {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              flex: 1;
+
+              .text {
+                flex: 1;
+              }
+            }
+            .share-link-container {
+              display: flex;
+              flex-direction: row;
+              flex: 1;
+              padding-top: 8px;
+
+              .share-link-info {
+                flex: 1;
+                font-size: variables.$minimum-font-size;
+
+                .sharable-link {
+                  font-weight: fonts.$bold;
+                }
+                .copy-link,
+                .copy-passcode {
+                  color: variables.$blue-color;
+                  padding-left: 20px;
+                  cursor: pointer;
+                }
+
+                .passcode-container {
+                  padding-top: 10px;
+
+                  .passcode {
+                    font-weight: fonts.$bold;
+                    padding-left: 15px;
+                  }
+                }
+              }
+
+              .delete-link-container {
+                font-size: variables.$minimum-font-size;
+
+                .delete-link {
+                  color: #ff0007;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+      }
+    }
+    .event-room-right {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        height: 100%;
+        overflow-y: scroll;
+        //border-left: 1px solid variables.$gray-color;
+        [class^="MuiTab-root"],
+        [class*="MuiTab-root"] {
+          color: #1c1c1c;
+          opacity: 1;
+          text-transform: none;
+          font-weight: fonts.$medium;
+          //font-size: 1.25rem;
+          padding-left: 30px;
+          padding-right: 30px;
+          min-height: 60px;
+          // & > span {
+          //   margin-right: 12px !important;
+          // }
+        }
+  
+        [class^="Mui-selected"],
+        [class*="Mui-selected"] {
+          background-color: #eff3f7;
+          color: variables.$blue-color;
+        }
+  
+        [class^="MuiTabs-indicator"],
+        [class*="MuiTabs-indicator"] {
+          background-color: #eff3f7;
+        }
+    }
+    .tabpanel {
+        position: relative;
+      }
+    }
+}
+.cross-icon {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    cursor: pointer;
+  }

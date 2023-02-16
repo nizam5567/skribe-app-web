@@ -1,0 +1,73 @@
+@use "fonts";
+@use "sass-utils/variables";
+
+.container {
+  
+  .main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #F8F9F9;
+    align-items: center;
+    // padding-top: 45px;
+    // padding-bottom: 45px;
+    border-radius: 5px;
+    height: 100vh;
+    overflow: hidden;
+
+    .content {
+      width: 600px;      
+      height: 100vh;      
+      position: relative;
+      padding: 45px 0;
+
+      .circle-bottom {
+        position: absolute;
+        width: 258px;
+        height: 258px;
+        left: -130px;
+        bottom: -88px;
+        background: #D9D9D9;//rgba(217, 217, 217, 0.31);
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .circle-top1 {
+        box-sizing: border-box;
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        right: -70px;
+        top: -50px;
+        opacity: .3;
+        border: 1px solid #000000;
+        border-radius: 50%;
+      }
+
+      .circle-top2 {
+        box-sizing: border-box;
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        right: -103px;
+        top: -85px;
+        opacity: .3;
+        border: 1px solid #000000;
+        border-radius: 50%;
+      }
+
+      .role {
+        label {
+          margin-bottom: 0;
+
+          span[class*="MuiButtonBase-root"] {
+            padding-top: 5px;
+            padding-bottom: 5px;
+          }
+        }
+      }
+    }
+    
+  }
+  
+}

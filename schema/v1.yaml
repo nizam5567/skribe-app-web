@@ -1,0 +1,2140 @@
+openapi: 3.0.0
+paths:
+  /main/matters:
+    get:
+      operationId: getMatters
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MattersResponse"
+      tags:
+        &a1
+        - Matters
+      security:
+        &a2
+        - bearer: []
+    post:
+      operationId: createMatter
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMatterRequest"
+      responses:
+        "201":
+          description: ""
+      tags: *a1
+      security: *a2
+  "/main/matters/{id}":
+    get:
+      operationId: getMatter
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MatterResponse"
+      tags: *a1
+      security: *a2
+    put:
+      operationId: updateMatter
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMatterRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MatterResponse"
+      tags: *a1
+      security: *a2
+    delete:
+      operationId: deleteMater
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a1
+      security: *a2
+  /main/events:
+    get:
+      operationId: getEvents
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventsResponse"
+      tags:
+        &a3
+        - Events
+      security:
+        &a4
+        - bearer: []
+    post:
+      operationId: createEvent
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEventRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+      tags: *a3
+      security: *a4
+  "/main/events/{eventid}/participantLink":
+    get:
+      operationId: getParticipantLink
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantLinkResponse"
+      tags: *a3
+      security: *a4
+  /main/events/invitedEvents:
+    get:
+      operationId: getInvitedEvents
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventsResponse"
+      tags: *a3
+      security: *a4
+  /main/createvideoclip:
+    post:
+      operationId: createVideoClip
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateVideoClipRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateVideoClipResponse"
+      tags: *a3
+      security: *a4
+  /main/updatevideoclip:
+    put:
+      operationId: updateVideoClip
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateVideoClipRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateVideoClipResponse"
+      tags: *a3
+      security: *a4
+  "/main/getvideoclips/{eventid}":
+    get:
+      operationId: getvideoclips
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoClipListResponse"
+      tags: *a3
+      security: *a4
+  "/main/events/deletevideoclip/{clipid}":
+    delete:
+      operationId: EventsController_deleteVideoClip
+      parameters:
+        - name: clipid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+      security: *a4
+  "/main/events/gettranscriptstatus/{eventid}":
+    get:
+      operationId: getTranscriptStatus
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+      security: *a4
+  "/main/events/updatetranscript/{eventid}":
+    post:
+      operationId: EventsController_updateTranscriptStatus
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+      security: *a4
+  "/main/events/getposteventvideo/{eventid}":
+    get:
+      operationId: getPosteventVideo
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+      security: *a4
+  /main/events/start:
+    post:
+      operationId: startEvent
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartEventRequest"
+      responses:
+        "202":
+          description: ""
+      tags: *a3
+      security: *a4
+  /main/events/end:
+    post:
+      operationId: endEvent
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartEventRequest"
+      responses:
+        "202":
+          description: ""
+      tags: *a3
+      security: *a4
+  "/main/events/{id}":
+    get:
+      operationId: getEventDetail
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+      security: *a4
+    put:
+      operationId: updateEvent
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateEventRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+      tags: *a3
+      security: *a4
+  "/main/event/{eventId}/exhibits":
+    get:
+      operationId: getExhibitsByEvent
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitsResponse"
+      tags: *a3
+      security: *a4
+  "/main/event/{eventId}/party/exhibits":
+    get:
+      operationId: getExhibitsByParty
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitsResponse"
+      tags: *a3
+      security: *a4
+  /main/complete/events:
+    get:
+      operationId: getCompletedEvents
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompletedEventsResponse"
+      tags: *a3
+      security: *a4
+  "/main/event/{eventId}/participants":
+    get:
+      operationId: getParticipants
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+      security: *a4
+  /main/events/update-speaker-name:
+    post:
+      operationId: updateSpeakerNames
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSpeakerNameRequest"
+      responses:
+        "202":
+          description: ""
+      tags: *a3
+      security: *a4
+  "/main/parties/{eventid}":
+    get:
+      operationId: getPartiesByEvent
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartiesResponse"
+      tags:
+        &a5
+        - Parties
+      security:
+        &a6
+        - bearer: []
+  /main/parties/myConnectionParties:
+    get:
+      operationId: myConnectionParties
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantsResponse"
+      tags: *a5
+      security: *a6
+  /main/parties:
+    post:
+      operationId: createParty
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePartyRequest"
+      responses:
+        "201":
+          description: ""
+      tags: *a5
+      security: *a6
+  "/main/parties/{id}":
+    put:
+      operationId: updateParty
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePartyRequest"
+      responses:
+        "200":
+          description: ""
+      tags: *a5
+      security: *a6
+    delete:
+      operationId: deleteParty
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a5
+      security: *a6
+  "/main/parties/acceptInvitation/{eventId}":
+    get:
+      operationId: acceptInvitation
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a5
+      security: *a6
+  /main/users:
+    get:
+      operationId: getUsers
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersResponse"
+      tags:
+        &a7
+        - Users
+      security:
+        &a8
+        - bearer: []
+    post:
+      operationId: createUser
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUsersRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+      tags: *a7
+      security: *a8
+  "/main/users/{id}":
+    put:
+      operationId: updateUser
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUsersRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+      tags: *a7
+      security: *a8
+  /main/users/disableaccount:
+    post:
+      operationId: disableUser
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisableUserAccount"
+      responses:
+        "201":
+          description: ""
+      tags: *a7
+      security: *a8
+  /main/public/tenants:
+    post:
+      operationId: createTenant
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTenantRequest"
+      responses:
+        "201":
+          description: ""
+      tags:
+        &a9
+        - Tenants
+  /main/public/tenants/reset-password:
+    post:
+      operationId: resetUserPassword
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordRequest"
+      responses:
+        "200":
+          description: ""
+      tags: *a9
+  "/main/public/tenants/{email}":
+    get:
+      operationId: getTenantByEmail
+      summary: ""
+      parameters:
+        - name: email
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantResponse"
+      tags: *a9
+  /main/public/tenants/getGuestToken:
+    get:
+      operationId: getGuestToken
+      summary: ""
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantResponse"
+      tags: *a9
+  /main/exhibits:
+    post:
+      operationId: ExhibitsController_createExhibit
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateExhibitRequest"
+      responses:
+        "201":
+          description: ""
+      tags:
+        &a10
+        - Exhibits
+      security:
+        &a11
+        - bearer: []
+  "/main/exhibits/{id}":
+    delete:
+      operationId: deleteExhibit
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a10
+      security: *a11
+  "/main/exhibits/changeVisibility/{id}/{status}":
+    get:
+      operationId: changeVisibility
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: status
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a10
+      security: *a11
+  /main/uploads:
+    post:
+      operationId: ObjectsController_createMatter
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateObjectRequest"
+      responses:
+        "201":
+          description: ""
+      tags:
+        &a12
+        - Uploads
+      security:
+        &a13
+        - bearer: []
+  "/main/uploads/triggerVideoProcessing/{eventId}/{objectId}":
+    get:
+      operationId: ObjectsController_triggerVideoProcessing
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: objectId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a12
+      security: *a13
+  "/main/participants/{eventid}":
+    get:
+      operationId: getParticipants
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantsResponse"
+      tags:
+        &a14
+        - Participants
+      security:
+        &a15
+        - bearer: []
+  "/main/participants/getParticipantDetails/{participantKey}":
+    get:
+      operationId: getParticipantByKey
+      summary: ""
+      parameters:
+        - name: participantKey
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantResponse"
+      tags: *a14
+      security: *a15
+  "/main/participants/{participantKey}/getParticipantMeetingInfo":
+    get:
+      operationId: getParticipantMeetingInfo
+      summary: ""
+      parameters:
+        - name: participantKey
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantResponse"
+      tags: *a14
+      security: *a15
+  /main/participants:
+    post:
+      operationId: createParticipant
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateParticipantRequest"
+      responses:
+        "201":
+          description: ""
+      tags: *a14
+      security: *a15
+  "/main/participants/{id}":
+    put:
+      operationId: updateParticipant
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateParticipantRequest"
+      responses:
+        "200":
+          description: ""
+      tags: *a14
+      security: *a15
+    delete:
+      operationId: deleteParticipant
+      summary: ""
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a14
+      security: *a15
+  /main/participants/changeParticipantRole:
+    put:
+      operationId: changeParticipantRole
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateParticipantRole"
+      responses:
+        "200":
+          description: ""
+      tags: *a14
+      security: *a15
+  /main/calendars:
+    post:
+      operationId: createCalendar
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CalendarCreateRequest"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CalendarResponse"
+      tags:
+        &a16
+        - Calendars
+      security:
+        &a17
+        - bearer: []
+  "/main/calendars/{eventId}":
+    delete:
+      operationId: deleteCalendar
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: boolean
+      tags: *a16
+      security: *a17
+  "/main/guest/eventsbycode/{eventcode}":
+    get:
+      operationId: getGuestEvent
+      summary: ""
+      parameters:
+        - name: eventcode
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+      tags:
+        &a18
+        - Guest
+      security:
+        &a19
+        - bearer: []
+  "/main/guest/events/{eventid}":
+    get:
+      operationId: getGuestEvent
+      summary: ""
+      parameters:
+        - name: eventid
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+      tags: *a18
+      security: *a19
+  "/main/guest/participants/{participantKey}/getParticipantMeetingInfo":
+    get:
+      operationId: getParticipantMeetingInfoPublic
+      summary: ""
+      parameters:
+        - name: participantKey
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantResponse"
+      tags: *a18
+      security: *a19
+  "/main/guest/participants/getParticipantDetails/{participantKey}":
+    get:
+      operationId: getParticipantByKeyPublic
+      summary: ""
+      parameters:
+        - name: participantKey
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParticipantResponse"
+      tags: *a18
+      security: *a19
+  "/main/guest/event/{eventId}/participants":
+    get:
+      operationId: getParticipants
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+      tags: *a18
+      security: *a19
+  /main/guest/createParticipantGuestWitness:
+    post:
+      operationId: createParticipantGuestWitness
+      summary: ""
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateParticipantGuestWitness"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseParticipantGuest"
+      tags: *a18
+      security: *a19
+  "/main/guest/event/{eventId}/exhibits":
+    get:
+      operationId: getExhibitsByEvent
+      summary: ""
+      parameters:
+        - name: eventId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitsResponse"
+      tags: *a18
+      security: *a19
+info:
+  title: Skrib
+  description: Skrib
+  version: 2.11.7
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: apiKey
+      name: authorization
+      in: header
+  schemas:
+    MatterResponse:
+      type: object
+      properties:
+        events:
+          type: object
+        id:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+        tenantid:
+          type: number
+      required:
+        - events
+        - id
+        - title
+        - description
+    MattersResponse:
+      type: object
+      properties:
+        matters:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatterResponse"
+      required:
+        - matters
+    CreateMatterRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        tenantid:
+          type: number
+      required:
+        - title
+        - description
+    UpdateMatterRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        tenantid:
+          type: number
+        id:
+          type: number
+      required:
+        - title
+        - description
+        - id
+    EventStatus:
+      type: string
+      enum:
+        - DRAFT
+        - SCHEDULED
+        - IN_PROGRESS
+        - PREFLIGHT
+        - COMPLETE
+        - CANCELLED
+        - ARCHIVE
+        - ARCHIVE_COMPLETE
+    EventResponse:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/EventStatus"
+        eventcode:
+          type: string
+        accepted:
+          type: number
+        participantkey:
+          type: string
+        participantlink:
+          type: string
+        calenderid:
+          type: number
+        clip:
+          type: number
+        participant:
+          type: number
+        eventduration:
+          type: number
+        mattertitle:
+          type: string
+        schedulername:
+          type: string
+        previewlink:
+          type: string
+        id:
+          type: number
+        datestart:
+          type: string
+        timezone:
+          type: string
+        duration:
+          type: string
+        stipulation:
+          type: string
+        stipulationobjectid:
+          type: number
+        invited:
+          type: number
+        exhibit:
+          type: number
+        matterid:
+          type: number
+        title:
+          type: string
+        eventtype:
+          enum:
+            - Deposition
+            - Hearing
+            - Arbitration
+          type: string
+        tenantid:
+          type: number
+      required:
+        - status
+        - eventcode
+        - accepted
+        - participantkey
+        - participantlink
+        - calenderid
+        - clip
+        - participant
+        - eventduration
+        - mattertitle
+        - schedulername
+        - previewlink
+        - id
+        - invited
+        - exhibit
+        - matterid
+        - title
+        - eventtype
+        - tenantid
+    EventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/EventResponse"
+      required:
+        - events
+    ParticipantLinkResponse:
+      type: object
+      properties:
+        participantLink:
+          type: string
+        participantKey:
+          type: string
+      required:
+        - participantLink
+        - participantKey
+    CreateEventRequest:
+      type: object
+      properties:
+        matterid:
+          type: number
+        title:
+          type: string
+        eventtype:
+          enum:
+            &a20
+            - Deposition
+            - Hearing
+            - Arbitration
+          type: string
+        datestart:
+          type: string
+        timezone:
+          type: string
+        duration:
+          type: string
+        status:
+          enum:
+            &a21
+            - DRAFT
+            - SCHEDULED
+            - IN_PROGRESS
+            - PREFLIGHT
+            - COMPLETE
+            - CANCELLED
+            - ARCHIVE
+            - ARCHIVE_COMPLETE
+          type: string
+        tenantid:
+          type: number
+      required:
+        - matterid
+        - title
+        - eventtype
+        - status
+        - tenantid
+    CreateVideoClipRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        tenantid:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+        recordingtype:
+          enum:
+            - active_speaker
+            - gallery_view
+            - archive_video
+          type: string
+        starttimecode:
+          type: string
+        endtimecode:
+          type: string
+        bucketlocation:
+          type: string
+      required:
+        - eventid
+        - tenantid
+        - title
+        - description
+        - recordingtype
+        - starttimecode
+        - endtimecode
+        - bucketlocation
+    CreateVideoClipResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+    UpdateVideoClipRequest:
+      type: object
+      properties:
+        id:
+          type: number
+        tenantid:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - tenantid
+        - title
+        - description
+    UpdateVideoClipResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - title
+        - description
+    VideoClip:
+      type: object
+      properties:
+        clipId:
+          type: number
+        clipURL:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - clipId
+        - clipURL
+        - status
+        - title
+        - description
+    VideoClipListResponse:
+      type: object
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: "#/components/schemas/VideoClip"
+      required:
+        - clips
+    StartEventRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        tenantid:
+          type: number
+        email:
+          type: string
+      required:
+        - eventid
+        - tenantid
+        - email
+    UpdateEventRequest:
+      type: object
+      properties:
+        matterid:
+          type: number
+        title:
+          type: string
+        eventtype:
+          enum: *a20
+          type: string
+        datestart:
+          type: string
+        timezone:
+          type: string
+        duration:
+          type: string
+        status:
+          enum: *a21
+          type: string
+        tenantid:
+          type: number
+        id:
+          type: number
+        stipulation:
+          type: string
+        stipulationobjectid:
+          type: number
+        invited:
+          type: number
+        exhibit:
+          type: number
+      required:
+        - matterid
+        - title
+        - eventtype
+        - status
+        - tenantid
+        - id
+        - invited
+        - exhibit
+    ExhibitResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        tenantid:
+          type: number
+        status:
+          type: string
+        mimetype:
+          type: string
+        previewlink:
+          type: string
+        partyname:
+          type: string
+        uploadedby:
+          type: string
+        filesize:
+          type: number
+        updatedat:
+          type: number
+        objectid:
+          type: number
+        partyid:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+        eventid:
+          type: number
+        userid:
+          type: number
+      required:
+        - id
+        - tenantid
+        - status
+        - mimetype
+        - previewlink
+        - partyname
+        - uploadedby
+        - objectid
+        - partyid
+        - title
+        - description
+        - eventid
+        - userid
+    ExhibitsResponse:
+      type: object
+      properties:
+        exhibits:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExhibitResponse"
+      required:
+        - exhibits
+    CompletedEventResponse:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/EventStatus"
+        eventcode:
+          type: string
+        previewlink:
+          type: string
+        participantKey:
+          type: string
+        participantLink:
+          type: string
+        calenderId:
+          type: number
+        eventstart:
+          type: number
+        eventend:
+          type: number
+        eventduration:
+          type: number
+        id:
+          type: number
+        datestart:
+          type: string
+        timezone:
+          type: string
+        duration:
+          type: string
+        stipulation:
+          type: string
+        stipulationobjectid:
+          type: number
+        invited:
+          type: number
+        exhibit:
+          type: number
+        matterid:
+          type: number
+        title:
+          type: string
+        eventtype:
+          enum: *a20
+          type: string
+        tenantid:
+          type: number
+      required:
+        - status
+        - eventcode
+        - previewlink
+        - participantKey
+        - participantLink
+        - calenderId
+        - eventstart
+        - eventend
+        - eventduration
+        - id
+        - invited
+        - exhibit
+        - matterid
+        - title
+        - eventtype
+        - tenantid
+    CompletedEventsResponse:
+      type: object
+      properties:
+        completeEvents:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompletedEventResponse"
+      required:
+        - completeEvents
+    UpdateSpeakerNameRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        tenantid:
+          type: number
+        speakernames:
+          type: array
+          items:
+            type: string
+      required:
+        - eventid
+        - tenantid
+        - speakernames
+    PartyResponse:
+      type: object
+      properties:
+        email:
+          type: string
+        stipulationstatus:
+          type: string
+        stipulationupdatedby:
+          type: number
+        stipulationupdatedat:
+          type: string
+        stipulationupdatedbyinfo:
+          type: object
+        id:
+          type: number
+        eventid:
+          type: number
+        name:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        partytype:
+          type: string
+        tenantid:
+          type: number
+        invitationcode:
+          type: string
+      required:
+        - email
+        - stipulationstatus
+        - stipulationupdatedby
+        - stipulationupdatedat
+        - stipulationupdatedbyinfo
+        - id
+        - eventid
+        - name
+        - partytype
+        - tenantid
+        - invitationcode
+    PartiesResponse:
+      type: object
+      properties:
+        parties:
+          type: array
+          items:
+            $ref: "#/components/schemas/PartyResponse"
+      required:
+        - parties
+    TenantResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        serviceAccount:
+          type: string
+        bucket:
+          type: string
+        tenantkey:
+          type: string
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        company:
+          type: string
+        phone:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        invitationcode:
+          type: string
+      required:
+        - id
+        - serviceAccount
+        - bucket
+        - tenantkey
+        - email
+        - firstname
+        - lastname
+        - company
+        - country
+    TenantsResponse:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantResponse"
+      required:
+        - tenants
+    CreatePartyRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        partytype:
+          type: string
+        tenantid:
+          type: number
+        invitationcode:
+          type: string
+      required:
+        - eventid
+        - name
+        - email
+        - partytype
+        - tenantid
+        - invitationcode
+    UpdatePartyRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        partytype:
+          type: string
+        tenantid:
+          type: number
+        invitationcode:
+          type: string
+        id:
+          type: number
+      required:
+        - eventid
+        - name
+        - email
+        - partytype
+        - tenantid
+        - invitationcode
+        - id
+    UserResponse:
+      type: object
+      properties:
+        tenantid:
+          type: number
+        status:
+          type: string
+        disablestatus:
+          type: boolean
+        role:
+          type: string
+        id:
+          type: number
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        invitationcode:
+          type: string
+      required:
+        - tenantid
+        - status
+        - disablestatus
+        - role
+        - id
+        - firstname
+        - lastname
+        - email
+    UsersResponse:
+      type: object
+      properties:
+        tenantusers:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserResponse"
+      required:
+        - tenantusers
+    CreateUsersRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        invitationcode:
+          type: string
+        tenantid:
+          type: number
+        status:
+          type: string
+      required:
+        - firstname
+        - lastname
+        - email
+    UpdateUsersRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        invitationcode:
+          type: string
+        tenantid:
+          type: number
+        status:
+          type: string
+        id:
+          type: number
+      required:
+        - firstname
+        - lastname
+        - email
+        - id
+    DisableUserAccount:
+      type: object
+      properties:
+        userid:
+          type: number
+        disableStatus:
+          type: boolean
+        tenantid:
+          type: number
+      required:
+        - userid
+        - disableStatus
+    CreateTenantRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        company:
+          type: string
+        phone:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        invitationcode:
+          type: string
+      required:
+        - email
+        - firstname
+        - lastname
+        - company
+        - country
+    ResetPasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        firbaseTenantId:
+          type: string
+      required:
+        - email
+        - firbaseTenantId
+    CreateEventTenantRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        partyid:
+          type: number
+        tenantid:
+          type: number
+      required:
+        - eventid
+        - partyid
+        - tenantid
+    CreateExhibitRequest:
+      type: object
+      properties:
+        objectid:
+          type: number
+        partyid:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+        eventid:
+          type: number
+        tenantid:
+          type: number
+        userid:
+          type: number
+      required:
+        - objectid
+        - partyid
+        - title
+        - description
+        - eventid
+        - tenantid
+        - userid
+    CreateObjectRequest:
+      type: object
+      properties:
+        mimetype:
+          type: string
+        filename:
+          type: string
+        filesize:
+          type: number
+        tenantid:
+          type: number
+        eventid:
+          type: number
+        objecttype:
+          enum:
+            - Stipulation
+            - Exhibit
+            - ArchiveVideo
+          type: string
+        bucketlocation:
+          type: string
+      required:
+        - mimetype
+        - filename
+        - filesize
+        - tenantid
+        - eventid
+        - objecttype
+    ParticipantResponse:
+      type: object
+      properties:
+        participantKey:
+          type: string
+        isEmailSent:
+          type: boolean
+        partytype:
+          type: string
+        role:
+          type: string
+        id:
+          type: number
+        eventid:
+          type: number
+        partyid:
+          type: number
+        userid:
+          type: number
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        tenantid:
+          type: number
+      required:
+        - participantKey
+        - isEmailSent
+        - partytype
+        - role
+        - id
+        - eventid
+        - partyid
+        - userid
+        - firstname
+        - lastname
+        - email
+        - tenantid
+    ParticipantsResponse:
+      type: object
+      properties:
+        participants:
+          type: array
+          items:
+            $ref: "#/components/schemas/ParticipantResponse"
+      required:
+        - participants
+    CreateParticipantRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        partyid:
+          type: number
+        userid:
+          type: number
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        tenantid:
+          type: number
+      required:
+        - eventid
+        - partyid
+        - userid
+        - firstname
+        - lastname
+        - email
+        - tenantid
+    UpdateParticipantRequest:
+      type: object
+      properties:
+        eventid:
+          type: number
+        partyid:
+          type: number
+        userid:
+          type: number
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        tenantid:
+          type: number
+        id:
+          type: number
+        isEmailSent:
+          type: boolean
+      required:
+        - eventid
+        - partyid
+        - userid
+        - firstname
+        - lastname
+        - email
+        - tenantid
+        - id
+        - isEmailSent
+    UpdateParticipantRole:
+      type: object
+      properties:
+        id:
+          type: number
+        eventid:
+          type: number
+        email:
+          type: string
+        role:
+          enum:
+            - ATTENDING
+            - SCHEDULING
+            - GUEST
+            - WITNESS
+          type: string
+      required:
+        - id
+        - eventid
+        - email
+        - role
+    CalendarCreateRequest:
+      type: object
+      properties:
+        tenantid:
+          type: number
+        eventid:
+          type: number
+      required:
+        - tenantid
+        - eventid
+    CalendarResponse:
+      type: object
+      properties:
+        tenantid:
+          type: number
+        eventid:
+          type: number
+        id:
+          type: number
+        status:
+          type: string
+      required:
+        - tenantid
+        - eventid
+        - id
+        - status
+    CreateParticipantGuestWitness:
+      type: object
+      properties:
+        eventcode:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        title:
+          type: string
+        role:
+          enum:
+            - ATTENDING
+            - SCHEDULING
+            - GUEST
+            - WITNESS
+          type: string
+        eventid:
+          type: number
+      required:
+        - eventcode
+        - firstname
+        - lastname
+        - email
+        - role
+        - eventid
+    ResponseParticipantGuest:
+      type: object
+      properties:
+        participantKey:
+          type: string
+        participantLink:
+          type: string
+      required:
+        - participantKey
+        - participantLink

@@ -1,0 +1,6 @@
+[defaults]
+org = skribe-di
+project = app-web
+
+[auth]
+token = 1454d475fc8f4e719d038db8caad7f79ba2baa43c5804ee0a2b9a065a94c6750

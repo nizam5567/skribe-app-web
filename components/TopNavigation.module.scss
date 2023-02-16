@@ -1,0 +1,28 @@
+@use "../styles/fonts";
+@use "../styles/sass-utils/variables";
+
+@media screen and (max-width: 991px) {
+    .top-navigation{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px 20px;
+        width: 100%;
+        background-color: variables.$gray-color2;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 102;
+        min-height: 60px;
+
+        .hamburger-icon{
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .skribe-logo{
+            cursor: pointer;
+        }
+    }
+}

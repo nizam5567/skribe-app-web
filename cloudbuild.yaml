@@ -1,0 +1,39 @@
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - '-c'
+      - >
+        gcloud auth print-access-token --impersonate-service-account
+        artifact-registry-reader@skribe-common.iam.gserviceaccount.com >
+        /workspace/access_token
+    entrypoint: sh
+    timeout: 600s
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build --build-arg GH_AUTH=${_GH_AUTH} --build-arg
+        TOKEN=$(cat /workspace/access_token) -t
+        us-docker.pkg.dev/skribe-common/services/${_SERVICE}:latest -f
+        docker/prod/Dockerfile . &&
+
+        docker push us-docker.pkg.dev/skribe-common/services/${_SERVICE}
+    entrypoint: sh
+    timeout: 1200s
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - '-c'
+      - >
+        gcloud config set project ${_DEPLOY_PROJECT_ID} &&  gcloud run deploy
+        ${_SERVICE} --region ${_REGION}  --impersonate-service-account
+        ${_DEPLOY_SERVICE_ACCOUNT}  --allow-unauthenticated --ingress
+        internal-and-cloud-load-balancing --cpu 2000m --memory 2048Mi
+        --vpc-connector
+        projects/${_DEPLOY_PROJECT_ID}/locations/${_REGION}/connectors/${_VPC_CONNECTOR}
+        --min-instances 1 --service-account ${_SERVICE_ACCOUNT} --timeout 720
+        --image us-docker.pkg.dev/skribe-common/services/${_SERVICE}:latest
+        --platform managed
+    entrypoint: sh
+timeout: 1200s
+options:
+  machineType: E2_HIGHCPU_32
